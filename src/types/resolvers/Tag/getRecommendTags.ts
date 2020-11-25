@@ -14,9 +14,24 @@ export const getRecommendTags = queryField("getRecommendTags", {
       const lang = args.lang ?? "VI";
       const take = 20;
       let tags = [];
+      const FirstCapital =
+        word.length > 1
+          ? word.charAt(0).toUpperCase() + word.slice(1)
+          : word.length === 1
+          ? word.toUpperCase()
+          : "";
+      const AllCapital = word.length >= 1 ? word.toUpperCase() : "";
       let queryResult = await ctx.prisma.tag.findMany({
         where: {
-          names: { some: { word: { contains: word } } },
+          names: {
+            some: {
+              OR: [
+                { word: { startsWith: word }, lang },
+                { word: { startsWith: FirstCapital }, lang },
+                { word: { startsWith: AllCapital }, lang },
+              ],
+            },
+          },
           category: { in: ["Style", "ProductClass", "Feature", "Location"] },
         },
         select: {
