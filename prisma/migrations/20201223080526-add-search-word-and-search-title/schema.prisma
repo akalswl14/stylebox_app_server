@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model User {
@@ -37,24 +37,24 @@ model Product {
 }
 
 model ProductName {
-  id         Int      @id @default(autoincrement())
-  productId  Int?
-  Product    Product? @relation(fields: [productId], references: [id])
-  lang       String
-  word       String
-  searchWord String   @default("")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
-}
-
-model ProductImage {
   id        Int      @id @default(autoincrement())
   productId Int?
   Product   Product? @relation(fields: [productId], references: [id])
-  url       String
-  order     Int
+  lang      String
+  word      String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+model ProductImage {
+  id         Int      @id @default(autoincrement())
+  productId  Int?
+  Product    Product? @relation(fields: [productId], references: [id])
+  url        String
+  order      Int
+  searchWord String   @default("")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 }
 
 model ProductVideo {
