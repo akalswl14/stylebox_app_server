@@ -444,6 +444,7 @@ export const TagList = objectType({
     t.int("postNum");
     t.int("shopNum");
     t.int("productNum");
+    t.boolean("isClass");
   },
 });
 
@@ -464,6 +465,7 @@ export const TagInfo = objectType({
     t.string("tagImage", { nullable: true });
     t.string("className");
     t.int("classId");
+    t.boolean("isClass");
     t.int("postNum");
     t.int("shopNum");
     t.int("productNum");
@@ -599,6 +601,7 @@ export const ProductList = objectType({
   definition(t) {
     t.int("productId");
     t.string("productName");
+    t.string("shopName");
     t.int("price");
     t.int("postNum");
     t.string("link");
